@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>T2 Factor Visualizer</title>
+    <link rel="stylesheet" href="./assets/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+    <script src="./assets/app.js" defer></script>
+  </head>
+  <body>
+    <div id="banner" class="banner" aria-live="polite"></div>
+
+    <main class="layout">
+      <aside class="controls" aria-label="Selection Controls">
+        <h1>T2 Factor Visualizer</h1>
+        <p class="sub">Multi-sheet and multi-country time-series explorer</p>
+
+        <div class="field">
+          <label for="commandInput">Command Search</label>
+          <div class="row">
+            <input id="commandInput" type="text" placeholder="India Trailing P/E" autocomplete="off" />
+            <button id="commandApplyBtn" type="button">Apply</button>
+          </div>
+          <div id="suggestions" class="suggestions"></div>
+        </div>
+
+        <div class="field">
+          <label for="sheetFilter">Sheet Filter</label>
+          <input id="sheetFilter" type="text" placeholder="Filter sheets" autocomplete="off" />
+          <div class="actions">
+            <button id="selectFilteredSheetsBtn" type="button" class="ghost">Select Filtered</button>
+            <button id="clearSheetsBtn" type="button" class="ghost">Clear</button>
+          </div>
+          <select id="sheetSelect" multiple size="11" aria-label="Sheets"></select>
+        </div>
+
+        <div class="field">
+          <label for="countryFilter">Country Filter</label>
+          <input id="countryFilter" type="text" placeholder="Filter countries" autocomplete="off" />
+          <div class="actions">
+            <button id="selectFilteredCountriesBtn" type="button" class="ghost">Select Filtered</button>
+            <button id="clearCountriesBtn" type="button" class="ghost">Clear</button>
+          </div>
+          <select id="countrySelect" multiple size="11" aria-label="Countries"></select>
+        </div>
+
+        <div class="field">
+          <div class="actions">
+            <button id="undoBtn" type="button" class="ghost">Undo</button>
+            <button id="clearAllBtn" type="button" class="ghost">Clear All</button>
+          </div>
+        </div>
+      </aside>
+
+      <section class="chartPanel">
+        <div id="summary" class="summary" aria-live="polite"></div>
+
+        <div class="topControls">
+          <div class="ranges" role="group" aria-label="Date Range">
+            <button data-range="all" class="rangeBtn">All</button>
+            <button data-range="10y" class="rangeBtn">10Y</button>
+            <button data-range="5y" class="rangeBtn">5Y</button>
+            <button data-range="3y" class="rangeBtn">3Y</button>
+            <button data-range="1y" class="rangeBtn">1Y</button>
+          </div>
+          <div class="ranges" role="group" aria-label="Axis Mode">
+            <button data-axis="raw" class="axisBtn">Raw</button>
+            <button data-axis="indexed" class="axisBtn">Indexed</button>
+            <button data-axis="zscore" class="axisBtn">Z-Score</button>
+          </div>
+        </div>
+
+        <div class="canvasWrap">
+          <canvas id="seriesChart"></canvas>
+          <div id="emptyState" class="emptyState">Select at least one sheet and one country.</div>
+        </div>
+
+        <div class="legendHeader">Series Manager</div>
+        <div id="seriesManager" class="seriesManager"></div>
+      </section>
+    </main>
+  </body>
+</html>
